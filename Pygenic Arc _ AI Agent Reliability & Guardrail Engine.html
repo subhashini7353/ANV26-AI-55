@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)file:///C:/Users/ADMIN/Desktop/AI%20AGENT%20MVP/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pygenic Arc | AI Agent Reliability &amp; Guardrail Engine</title>
+
+    <link rel="stylesheet" href="./Pygenic Arc _ AI Agent Reliability &amp; Guardrail Engine_files/style.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">🛡️</div>
+
+        <div>
+            <h2>Pygenic Arc</h2>
+            <span>Guardrail Engine</span>
+        </div>
+    </div>
+
+    <nav>
+
+        <button class="nav-btn" onclick="showPage('dashboard', this)">
+            <span>📊</span>
+            Dashboard
+        </button>
+
+        <button class="nav-btn active" onclick="showPage('agent', this)">
+            <span>🤖</span>
+            Agent Simulator
+        </button>
+
+        <button class="nav-btn" onclick="showPage('analysis', this)">
+            <span>🛡️</span>
+            Guardrail Analysis
+        </button>
+
+        <button class="nav-btn" onclick="showPage('logs', this)">
+            <span>📋</span>
+            Activity Logs
+        </button>
+
+        <button class="nav-btn" onclick="showPage('testlab', this)">
+            <span>🧪</span>
+            Test Lab
+        </button>
+
+        <button class="nav-btn" onclick="showPage('policies', this)">
+            <span>⚙️</span>
+            Guardrail Policies
+        </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>Engine Online</strong>
+                <small>Monitoring AI actions</small>
+            </div>
+        </div>
+
+        <button class="kill-btn" onclick="killAgent()">
+            🚨 Emergency Kill Switch
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+            <h1 id="pageTitle">Agent Simulator</h1>
+
+            <p id="pageSubtitle">Test how Pygenic Arc protects AI actions</p>
+        </div>
+
+        <div class="top-status">
+            <span class="live-dot"></span>
+            Live Protection
+        </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard" class="page">
+
+        <div class="hero">
+
+            <div>
+
+                <span class="badge">
+                    AI SAFETY LAYER
+                </span>
+
+                <h2>
+                    Protect every AI action<br>
+                    <span>before it executes.</span>
+                </h2>
+
+                <p>
+                    Pygenic Arc verifies AI agent actions against user intent,
+                    permissions, safety policies and risk factors.
+                </p>
+
+                <button class="primary-btn" onclick="openAgent()">
+                    Launch Agent Simulator →
+                </button>
+
+            </div>
+
+            <div class="hero-shield">
+                🛡️
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon blue">⚡</div>
+
+                <div>
+                    <span>Total Actions</span>
+                    <strong id="totalActions">3</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">✓</div>
+
+                <div>
+                    <span>Allowed</span>
+                    <strong id="allowedActions">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon yellow">!</div>
+
+                <div>
+                    <span>Confirmation</span>
+                    <strong id="confirmActions">1</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon red">✕</div>
+
+                <div>
+                    <span>Blocked</span>
+                    <strong id="blockedActions">2</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD GRID -->
+
+        <div class="dashboard-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>AI Reliability Score</h3>
+                        <p>Based on recent guarded actions</p>
+                    </div>
+
+                    <strong class="score" id="reliabilityScore">90%</strong>
+
+                </div>
+
+                <div class="progress">
+                    <div id="reliabilityBar" class="progress-fill" style="width: 90%;">
+                    </div>
+                </div>
+
+                <div class="reliability-info">
+
+                    <span>
+                        Intent Accuracy
+                    </span>
+
+                    <strong id="intentAccuracy">100%</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Decision Distribution</h3>
+                        <p>Guardrail outcomes</p>
+                    </div>
+
+                </div>
+
+                <div class="decision-bars">
+
+                    <div class="decision-row">
+
+                        <span>Allow</span>
+
+                        <div class="mini-progress">
+                            <div id="allowBar" class="allow-fill" style="width:0%">
+                            </div>
+                        </div>
+
+                        <strong id="allowPercent">0%</strong>
+
+                    </div>
+
+
+                    <div class="decision-row">
+
+                        <span>Confirm</span>
+
+                        <div class="mini-progress">
+                            <div id="confirmBar" class="confirm-fill" style="width: 33%;">
+                            </div>
+                        </div>
+
+                        <strong id="confirmPercent">33%</strong>
+
+                    </div>
+
+
+                    <div class="decision-row">
+
+                        <span>Block</span>
+
+                        <div class="mini-progress">
+                            <div id="blockBar" class="block-fill" style="width: 67%;">
+                            </div>
+                        </div>
+
+                        <strong id="blockPercent">67%</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- UNIQUE FEATURES -->
+
+        <div class="section-heading">
+
+            <h2>Unique Protection Features</h2>
+
+            <p>
+                How Pygenic Arc makes AI agents safer and more reliable.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🎯</div>
+
+                <h3>Intent Drift Detection</h3>
+
+                <p>
+                    Compares the user's original request with the AI's
+                    planned action to detect unintended changes.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📈</div>
+
+                <h3>Dynamic Risk Score</h3>
+
+                <p>
+                    Calculates risk using multiple factors instead of
+                    relying on a single rule.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">👁️</div>
+
+                <h3>Action Preview</h3>
+
+                <p>
+                    Shows users what the AI intends to do before
+                    the action is executed.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">💡</div>
+
+                <h3>Explainable Decisions</h3>
+
+                <p>
+                    Provides a clear reason for every Allow,
+                    Confirm or Block decision.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">👤</div>
+
+                <h3>Human-in-the-Loop</h3>
+
+                <p>
+                    Sensitive medium-risk actions require user
+                    confirmation before execution.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🚨</div>
+
+                <h3>Emergency Kill Switch</h3>
+
+                <p>
+                    Instantly stops simulated agent execution
+                    when suspicious behavior is detected.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= AGENT ================= -->
+
+    <section id="agent" class="page active">
+
+        <div class="section-heading">
+
+            <span class="badge">
+                AGENT SIMULATOR
+            </span>
+
+            <h2>Give your AI agent a task</h2>
+
+            <p>
+                Enter a natural-language request and observe how
+                Pygenic Arc analyzes the planned action.
+            </p>
+
+        </div>
+
+
+        <div class="agent-layout">
+
+            <div class="panel chat-panel">
+
+                <div class="chat-header">
+
+                    <div class="agent-avatar">
+                        🤖
+                    </div>
+
+                    <div>
+                        <strong>Pygenic AI Agent</strong>
+                        <small>Ready to receive instructions</small>
+                    </div>
+
+                </div>
+
+
+                <div id="chatMessages" class="chat-messages">
+
+                    <div class="message agent-message">
+
+                        Hello! Give me a task and I will create
+                        a simulated action plan. Pygenic Arc will
+                        verify it before execution.
+
+                    </div>
+
+                <div class="message agent-message">Request blocked. Never enter or share passwords, PINs, or banking details here.</div><div class="message user-message">delete my files</div><div class="message agent-message">Request blocked. Never enter or share passwords, PINs, or banking details here.</div></div>
+
+
+                <div class="example-buttons">
+
+                    <button onclick="useExample('send')">
+                        📧 Send Report
+                    </button>
+
+                    <button onclick="useExample('payment')">
+                        💳 Make Payment
+                    </button>
+
+                    <button onclick="useExample('delete')">
+                        🗑️ Delete Files
+                    </button>
+
+                </div>
+
+
+                <div class="input-area">
+
+                    <input id="userInput" type="text" placeholder="Example: Send my report to John" onkeydown="handleEnter(event)">
+
+                    <button onclick="analyzeRequest()">
+                        Analyze
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTION PREVIEW -->
+
+            <div class="panel preview-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>AI Action Preview</h3>
+                        <p>What the agent plans to do</p>
+                    </div>
+
+                </div>
+
+                <div id="emptyPreview" class="empty-state hidden">
+
+                    <div>🔍</div>
+
+                    <p>
+                        Enter a request to see the
+                        AI's planned action.
+                    </p>
+
+                </div>
+
+                <div id="analysisContent" class="analysis-content">
+
+                    <div class="action-preview">
+
+                        <span class="label">
+                            USER REQUEST
+                        </span>
+
+                        <p id="displayRequest">Sensitive credential or financial information request</p>
+
+                    </div>
+
+                    <div class="arrow">
+                        ↓
+                    </div>
+
+                    <div class="action-preview">
+
+                        <span class="label">
+                            AI PLANNED ACTION
+                        </span>
+
+                        <p id="plannedAction">Blocked: credentials and financial details must not be shared.</p>
+
+                    </div>
+
+
+                    <div class="risk-card">
+
+                        <div>
+
+                            <span>Risk Score</span>
+
+                            <strong id="riskScore">100</strong>
+
+                            <small>/100</small>
+
+                        </div>
+
+                        <div class="risk-meter">
+
+                            <div id="riskBar" class="risk-fill" style="width: 100%; background: var(--red);">
+                            </div>
+
+                        </div>
+
+                        <span id="riskLevel" class="risk-level" style="color: var(--red);">HIGH</span>
+
+                    </div>
+
+
+                    <div class="checks">
+
+                        <h4>Guardrail Checks</h4>
+
+                        <div class="check-row">
+
+                            <span>Intent Match</span>
+                            <strong id="intentCheck">✓ Match</strong>
+
+                        </div>
+
+                        <div class="check-row">
+
+                            <span>Permission</span>
+                            <strong id="permissionCheck">✕ Denied</strong>
+
+                        </div>
+
+                        <div class="check-row">
+
+                            <span>Safety</span>
+                            <strong id="safetyCheck">✕ Risk Detected</strong>
+
+                        </div>
+
+                        <div class="check-row">
+
+                            <span>Policy</span>
+                            <strong id="policyCheck">1 Rule(s)</strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="decision-box">
+
+                        <span>DECISION</span>
+
+                        <strong id="decisionBadge" style="color: var(--red);">BLOCK</strong>
+
+                    </div>
+
+
+                    <div class="reason-box">
+
+                        <strong>
+                            💡 Why?
+                        </strong>
+
+                        <p id="decisionReason">Sensitive Information: Never enter or share passwords, PINs, or banking details here.</p>
+
+                    </div>
+
+
+                    <div id="confirmationBox" class="confirmation-box hidden">
+
+                        <h4>
+                            ⚠️ User Confirmation Required
+                        </h4>
+
+                        <p>
+                            This action has medium risk.
+                            Do you want the agent to continue?
+                        </p>
+
+                        <div class="confirm-buttons">
+
+                            <button onclick="approveAction()" class="approve-btn">
+                                ✓ Approve
+                            </button>
+
+                            <button onclick="rejectAction()" class="reject-btn">
+                                ✕ Reject
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button id="executeBtn" class="execute-btn hidden" onclick="executeAction()">
+                        Execute Safe Action
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ANALYSIS ================= -->
+
+    <section id="analysis" class="page">
+
+        <div class="section-heading">
+
+            <span class="badge">
+                GUARDRAIL ANALYSIS
+            </span>
+
+            <h2>How Pygenic Arc makes decisions</h2>
+
+            <p>
+                Every planned AI action passes through multiple
+                independent safety checks.
+            </p>
+
+        </div>
+
+
+        <div class="flow">
+
+            <div class="flow-card">
+                <span>01</span>
+                <strong>User Request</strong>
+                <small>Natural language input</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-card">
+                <span>02</span>
+                <strong>AI Action Plan</strong>
+                <small>Structured action</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-card guard">
+                <span>03</span>
+                <strong>Pygenic Arc</strong>
+                <small>Guardrail engine</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-card">
+                <span>04</span>
+                <strong>Decision</strong>
+                <small>Allow / Confirm / Block</small>
+            </div>
+
+        </div>
+
+
+        <div class="analysis-grid">
+
+            <div class="panel">
+
+                <h3>Risk Factors</h3>
+
+                <div class="rule-list">
+
+                    <div>
+                        <span>📧 Email / File Sharing</span>
+                        <b>+25</b>
+                    </div>
+
+                    <div>
+                        <span>💳 Financial Transaction</span>
+                        <b>+40</b>
+                    </div>
+
+                    <div>
+                        <span>🗑️ Data Deletion</span>
+                        <b>+45</b>
+                    </div>
+
+                    <div>
+                        <span>🔐 Sensitive Information</span>
+                        <b>+35</b>
+                    </div>
+
+                    <div>
+                        <span>🌐 External Action</span>
+                        <b>+20</b>
+                    </div>
+
+                    <div>
+                        <span>🎯 Intent Mismatch</span>
+                        <b>+40</b>
+                    </div>
+
+                    <div>
+                        <span>🔑 Permission Violation</span>
+                        <b>+50</b>
+                    </div>
+
+                    <div>
+                        <span>⚙️ Account/Security Change</span>
+                        <b>+45</b>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <h3>Decision Logic</h3>
+
+                <div class="decision-logic">
+
+                    <div class="logic low">
+
+                        <strong>0–29</strong>
+
+                        <span>LOW RISK</span>
+
+                        <p>
+                            Automatically allow safe actions.
+                        </p>
+
+                    </div>
+
+                    <div class="logic medium">
+
+                        <strong>30–69</strong>
+
+                        <span>MEDIUM RISK</span>
+
+                        <p>
+                            Ask the user for confirmation.
+                        </p>
+
+                    </div>
+
+                    <div class="logic high">
+
+                        <strong>70–100</strong>
+
+                        <span>HIGH RISK</span>
+
+                        <p>
+                            Block the action automatically.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= LOGS ================= -->
+
+    <section id="logs" class="page">
+
+        <div class="section-heading">
+
+            <span class="badge">
+                AUDIT TRAIL
+            </span>
+
+            <h2>Activity Logs</h2>
+
+            <p>
+                Every guarded action is recorded for transparency.
+            </p>
+
+        </div>
+
+
+        <div class="panel table-panel">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Time</th>
+                        <th>User Request</th>
+                        <th>Action</th>
+                        <th>Risk</th>
+                        <th>Decision</th>
+                        <th>Reason</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="logTable"><tr>
+
+        <td>3:57:46 pm</td>
+
+        <td>
+            Sensitive credential or financial information request
+        </td>
+
+        <td>
+            Blocked: credentials and financial details must not be shared.
+        </td>
+
+        <td>
+            <strong style="color:var(--red)">
+                100/100
+            </strong>
+        </td>
+
+        <td>
+            <strong style="color:var(--red)">
+                BLOCK
+            </strong>
+        </td>
+
+        <td>
+            1
+            rule(s) triggered
+        </td>
+
+    </tr><tr>
+
+        <td>3:57:16 pm</td>
+
+        <td>
+            delete my files
+        </td>
+
+        <td>
+            delete my files
+        </td>
+
+        <td>
+            <strong style="color:var(--yellow)">
+                65/100
+            </strong>
+        </td>
+
+        <td>
+            <strong style="color:var(--yellow)">
+                CONFIRM
+            </strong>
+        </td>
+
+        <td>
+            2
+            rule(s) triggered
+        </td>
+
+    </tr><tr>
+
+        <td>3:56:28 pm</td>
+
+        <td>
+            Sensitive credential or financial information request
+        </td>
+
+        <td>
+            Blocked: credentials and financial details must not be shared.
+        </td>
+
+        <td>
+            <strong style="color:var(--red)">
+                100/100
+            </strong>
+        </td>
+
+        <td>
+            <strong style="color:var(--red)">
+                BLOCK
+            </strong>
+        </td>
+
+        <td>
+            1
+            rule(s) triggered
+        </td>
+
+    </tr>
+
+                    
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TEST LAB ================= -->
+
+    <section id="testlab" class="page">
+
+        <div class="section-heading">
+
+            <span class="badge">
+                TEST LAB
+            </span>
+
+            <h2>Test Pygenic Arc</h2>
+
+            <p>
+                Run predefined scenarios to demonstrate
+                the guardrail engine.
+            </p>
+
+        </div>
+
+
+        <div class="test-grid">
+
+            <div class="test-card safe">
+
+                <span>SAFE SCENARIO</span>
+
+                <h3>Send Report to John</h3>
+
+                <p>
+                    Correct recipient and normal file-sharing request.
+                </p>
+
+                <button onclick="runTest('safe')">
+                    Run Test →
+                </button>
+
+            </div>
+
+
+            <div class="test-card mismatch">
+
+                <span>INTENT DRIFT</span>
+
+                <h3>Wrong Recipient</h3>
+
+                <p>
+                    User requests John but AI plans to send
+                    the file to James.
+                </p>
+
+                <button onclick="runTest('mismatch')">
+                    Run Test →
+                </button>
+
+            </div>
+
+
+            <div class="test-card sensitive">
+
+                <span>SENSITIVE</span>
+
+                <h3>Financial Transaction</h3>
+
+                <p>
+                    AI attempts a financial transaction.
+                </p>
+
+                <button onclick="runTest('sensitive')">
+                    Run Test →
+                </button>
+
+            </div>
+
+
+            <div class="test-card dangerous">
+
+                <span>HIGH RISK</span>
+
+                <h3>Delete Important Data</h3>
+
+                <p>
+                    AI attempts to delete important files.
+                </p>
+
+                <button onclick="runTest('delete')">
+                    Run Test →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= POLICIES ================= -->
+
+    <section id="policies" class="page">
+
+        <div class="section-heading">
+
+            <span class="badge">
+                POLICY ENGINE
+            </span>
+
+            <h2>Guardrail Policies</h2>
+
+            <p>
+                These rules define how the protection engine
+                evaluates AI actions.
+            </p>
+
+        </div>
+
+
+        <div class="policy-grid" id="policyGrid">
+
+        <div class="policy-card">
+
+            <h3>
+                Intent Mismatch
+            </h3>
+
+            <p>
+                The AI's planned action does not match the user's original request.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +40
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                Financial Transaction
+            </h3>
+
+            <p>
+                Financial actions can cause direct monetary impact.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +40
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                File Sharing
+            </h3>
+
+            <p>
+                Sharing files may expose information to another person or service.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +25
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                Data Deletion
+            </h3>
+
+            <p>
+                Deleting data may result in permanent data loss.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +45
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                Sensitive Information
+            </h3>
+
+            <p>
+                The action involves potentially sensitive information.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +35
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                External Action
+            </h3>
+
+            <p>
+                The AI is attempting to perform an external action.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +20
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                Permission Violation
+            </h3>
+
+            <p>
+                The AI does not have permission to perform the planned action.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +50
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                Security / Account Change
+            </h3>
+
+            <p>
+                Changing security or account settings can create significant risk.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +45
+            </span>
+
+        </div><div class="policy-card">
+
+            <h3>
+                Large Transaction
+            </h3>
+
+            <p>
+                The transaction amount exceeds the prototype's high-value threshold.
+            </p>
+
+            <span class="policy-risk">
+                Risk Weight +50
+            </span>
+
+        </div></div>
+
+    </section>
+
+
+</main>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast">
+
+    <span>✓</span>
+
+    <p id="toastText">Sensitive information requests are blocked.</p>
+
+</div>
+
+
+<script src="./Pygenic Arc _ AI Agent Reliability &amp; Guardrail Engine_files/script.js"></script>
+
+
+</body></html>
